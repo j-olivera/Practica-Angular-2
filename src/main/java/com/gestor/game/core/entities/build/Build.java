@@ -1,6 +1,8 @@
 package com.gestor.game.core.entities.build;
 
 import com.gestor.game.core.entities.item.Item;
+import com.gestor.game.core.exceptions.NullException;
+import com.gestor.game.core.exceptions.build.NameNotValidException;
 
 public class Build {
     private Long id;
@@ -10,13 +12,31 @@ public class Build {
     private Item amount;
     private Item blessing;
 
-    public Build(Long id, String name, Item sword, Item armor, Item amount, Item blessing) {
+    private Build(Long id, String name, Item sword, Item armor, Item amount, Item blessing) {
         this.id = id;
         this.name = name;
         this.sword = sword;
         this.armor = armor;
         this.amount = amount;
         this.blessing = blessing;
+    }
+
+    public static Build create(String name, Item sword, Item armor, Item amount, Item blessing) {
+        validate(sword, armor, amount, blessing, name);
+        return new Build(null, name, sword, armor, amount, blessing);
+    }
+
+    public static Build reconstruct(Long id, String name, Item sword, Item armor, Item amount, Item blessing) {
+        return new Build(id, name, sword, armor, amount, blessing);
+    }
+
+    public static void validate(Item sword, Item armor, Item amount, Item blessing, String name) {
+        if (sword == null || armor == null || amount == null || blessing == null || name == null) {
+            throw new NullException("No se permiten valores nulos");
+        }
+        if(name.length() < 3 || name.trim().isEmpty() || name.length() > 20 ) {
+            throw new NameNotValidException("Nombre no valido");
+        }
     }
 
     public Long getId() {
