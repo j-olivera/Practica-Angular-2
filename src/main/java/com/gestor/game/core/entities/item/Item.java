@@ -1,6 +1,10 @@
 package com.gestor.game.core.entities.item;
 
 import com.gestor.game.core.enums.item.Category;
+import com.gestor.game.core.exceptions.NameNotValidException;
+import com.gestor.game.core.exceptions.NullException;
+
+import java.time.LocalDateTime;
 
 public class Item {
 
@@ -14,6 +18,24 @@ public class Item {
         this.name = name;
         this.statistic_point = statistic_point;
         this.category = category;
+    }
+
+    private static Item create(String name, LocalDateTime date, int statistic_point, Category category) {
+        validate(name, date, statistic_point, category);
+        return new Item(null, name, statistic_point, category);
+    }
+
+    private static Item reconstruct(Long id, String name, LocalDateTime date, int statistic_point, Category category) {
+        return new Item(id, name, statistic_point, category);
+    }
+
+    public static void validate(String name, LocalDateTime date, int statistic_point, Category category) {
+        if(name==null || date == null || statistic_point < 0 || category == null){
+            throw new NullException("Valores nulos o negativos no validos");
+        }
+        if(name.trim().isEmpty() || name.length() < 3 || name.length() > 50){
+            throw new NameNotValidException("Nombre no valido");
+        }
     }
 
     public Long getId() {
