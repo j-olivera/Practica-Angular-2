@@ -2,7 +2,7 @@ package com.gestor.game.core.entities.build;
 
 import com.gestor.game.core.entities.item.Item;
 import com.gestor.game.core.exceptions.NullException;
-import com.gestor.game.core.exceptions.build.NameNotValidException;
+import com.gestor.game.core.exceptions.NameNotValidException;
 
 public class Build {
     private Long id;
@@ -38,6 +38,8 @@ public class Build {
             throw new NameNotValidException("Nombre no valido");
         }
     }
+
+    //hay que seguir con las siguientes entidades replicando este mismo patron SIEMPRE
 
     public Long getId() {
         return id;
