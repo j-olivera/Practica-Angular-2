@@ -13,19 +13,19 @@ public class Item {
     private int statistic_point;
     private Category category;
 
-    public Item(Long id, String name, int statistic_point, Category category) {
+    private Item(Long id, String name, int statistic_point, Category category) {
         this.id = id;
         this.name = name;
         this.statistic_point = statistic_point;
         this.category = category;
     }
 
-    private static Item create(String name, LocalDateTime date, int statistic_point, Category category) {
+    public static Item create(String name, LocalDateTime date, int statistic_point, Category category) {
         validate(name, date, statistic_point, category);
         return new Item(null, name, statistic_point, category);
     }
 
-    private static Item reconstruct(Long id, String name, LocalDateTime date, int statistic_point, Category category) {
+    public static Item reconstruct(Long id, String name, LocalDateTime date, int statistic_point, Category category) {
         return new Item(id, name, statistic_point, category);
     }
 
