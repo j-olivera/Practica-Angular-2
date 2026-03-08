@@ -9,15 +9,15 @@ public class Build {
     private String name;
     private Item sword;
     private Item armor;
-    private Item amount;
+    private Item mount;
     private Item blessing;
 
-    private Build(Long id, String name, Item sword, Item armor, Item amount, Item blessing) {
+    private Build(Long id, String name, Item sword, Item armor, Item mount, Item blessing) {
         this.id = id;
         this.name = name;
         this.sword = sword;
         this.armor = armor;
-        this.amount = amount;
+        this.mount = mount;
         this.blessing = blessing;
     }
 
@@ -57,8 +57,8 @@ public class Build {
         return armor;
     }
 
-    public Item getAmount() {
-        return amount;
+    public Item getMount() {
+        return mount;
     }
 
     public Item getBlessing() {
