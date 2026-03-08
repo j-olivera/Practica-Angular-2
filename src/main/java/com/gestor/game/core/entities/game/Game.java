@@ -9,10 +9,18 @@ public class Game {
     private LocalDateTime date;
     private Result gameResult;
 
-    public Game(Long id, LocalDateTime date, Result gameResult) {
+    private Game(Long id, LocalDateTime date, Result gameResult) {
         this.id = id;
         this.date = date;
         this.gameResult = gameResult;
+    }
+
+    public static Game create(LocalDateTime date, Result gameResult) {
+        return new Game(null, date, gameResult);
+    }
+
+    public static Game reconstruct(Long id, LocalDateTime date, Result gameResult) {
+        return new Game(id, date, gameResult);
     }
 
     public Long getId() {
