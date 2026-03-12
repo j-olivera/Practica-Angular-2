@@ -1,5 +1,6 @@
 package com.gestor.game.core.entities.user;
 
+import com.gestor.game.core.exceptions.NameNotValidException;
 import com.gestor.game.core.exceptions.NullException;
 
 public class User {
@@ -27,6 +28,10 @@ public class User {
     public static void validate(String name, String email, String password) {
         if(name == null || name.isEmpty() || email == null || email.isEmpty() || password == null || password.isEmpty()) {
             throw new NullException("No se permiten valores vacíos ni nulos");
+        }
+
+        if(!name.matches("^[\\x00-\\x7F]+$")) {
+            throw new NameNotValidException("El nombre solo puede tener caracteres ASCI");
         }
     }
 

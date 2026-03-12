@@ -7,7 +7,6 @@ import java.util.Optional;
 public interface BuildRepositoryPort {
     Build save(Build build);
     Optional<Build> findById(Long id);
-
-    void delete(Build build);
+    void delete(Long id);
 
 }
