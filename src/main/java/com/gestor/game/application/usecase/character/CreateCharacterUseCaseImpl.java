@@ -36,10 +36,13 @@ public class CreateCharacterUseCaseImpl implements CreateCharacterUseCase {
 
     @Override
     public CharacterResponse createCharacter(CharacterRequest characterRequest) {
+
         User user = userRepositoryPort.findById(characterRequest.userId())
                 .orElseThrow(()-> new UserDontExistException("User don't exist"));
+
         Build build = buildRepositoryPort.findById(characterRequest.buildId())
                 .orElseThrow(()-> new BuildDontExistException("Build don't exist"));
+
         if(characterRepositoryPort.existsByName(characterRequest.name())) {
             throw new NameNotValidException("Name already exists");
         }
