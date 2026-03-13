@@ -6,7 +6,7 @@ import com.gestor.game.application.port.in.user.CreateUserUseCase;
 import com.gestor.game.application.port.out.user.UserRepositoryPort;
 import com.gestor.game.core.entities.user.User;
 import com.gestor.game.core.exceptions.user.UserAlreadyExistException;
-import com.gestor.game.infrastructure.adapters.user.UserMapper;
+import com.gestor.game.application.mappers.user.UserMapper;
 
 public class CreateUserUseCaseImpl implements CreateUserUseCase {
 

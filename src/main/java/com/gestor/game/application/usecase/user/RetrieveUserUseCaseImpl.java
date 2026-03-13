@@ -5,7 +5,7 @@ import com.gestor.game.application.port.in.user.RetrieveUserUseCase;
 import com.gestor.game.application.port.out.user.UserRepositoryPort;
 import com.gestor.game.core.entities.user.User;
 import com.gestor.game.core.exceptions.user.UserDontExistException;
-import com.gestor.game.infrastructure.adapters.user.UserMapper;
+import com.gestor.game.application.mappers.user.UserMapper;
 
 public class RetrieveUserUseCaseImpl implements RetrieveUserUseCase {
     private final UserRepositoryPort userRepositoryPort;
