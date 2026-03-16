@@ -43,6 +43,6 @@ public class RetrieveCharacterUseCaseImpl implements RetrieveCharacterUseCase {
         if (characters.isEmpty()) {
             throw new CharacterDoesNotExistException("User with id " + user.getId() + " don't have any characters");
         }
-        return List.of();
+        return characterMapper.toResponse(characters);
     }
 }

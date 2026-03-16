@@ -20,6 +20,7 @@ public class RegisterGameUseCaseImpl implements RegisterGameUseCase {
     public GameResponse registerGame(GameRequest gameRequest) {
         //mismo caso que item, solo que no puede haber juegos repetidos por logica
         Game  game = gameMapper.toEntity(gameRequest);
-        return null;
+        Game saved = gameRepositoryPort.save(game);
+        return gameMapper.toResponse(saved);
     }
 }
