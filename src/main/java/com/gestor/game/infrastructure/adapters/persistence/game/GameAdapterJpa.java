@@ -2,10 +2,11 @@ package com.gestor.game.infrastructure.adapters.persistence.game;
 
 import com.gestor.game.application.port.out.game.GameRepositoryPort;
 import com.gestor.game.core.entities.game.Game;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
-
+@Component
 public class GameAdapterJpa implements GameRepositoryPort {
     private final GameRepositoryJpa gameRepository;
     private final GameMapperJpa gameMapperJpa;

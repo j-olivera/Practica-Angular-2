@@ -1,7 +1,10 @@
 package com.gestor.game.infrastructure.adapters.persistence.game;
 
 import com.gestor.game.core.entities.game.Game;
+import jakarta.persistence.Column;
+import org.springframework.stereotype.Component;
 
+@Component
 public class GameMapperJpa {
     public GameEntity toJpaEntity(Game game) {
         if (game == null) return null;
