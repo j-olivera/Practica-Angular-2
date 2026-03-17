@@ -1,7 +1,9 @@
 package com.gestor.game.infrastructure.adapters.persistence.user;
 
 import com.gestor.game.core.entities.user.User;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UserMapperJpa {
     public User toCore(UserEntity userEntity){
         if(userEntity==null) return null;

@@ -3,9 +3,10 @@ package com.gestor.game.infrastructure.adapters.persistence.user;
 import com.gestor.game.application.port.out.user.UserRepositoryPort;
 import com.gestor.game.core.entities.user.User;
 import com.gestor.game.core.exceptions.user.UserDontExistException;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
-
+@Component
 public class UserAdapterJpa implements UserRepositoryPort {
     private final UserRepositoryJpa userRepositoryJpa;
     private final UserMapperJpa userMapperJpa;

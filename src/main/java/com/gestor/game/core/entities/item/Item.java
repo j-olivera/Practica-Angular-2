@@ -20,17 +20,17 @@ public class Item {
         this.category = category;
     }
 
-    public static Item create(String name, LocalDateTime date, int statistic_point, Category category) {
-        validate(name, date, statistic_point, category);
+    public static Item create(String name, int statistic_point, Category category) {
+        validate(name, statistic_point, category);
         return new Item(null, name, statistic_point, category);
     }
 
-    public static Item reconstruct(Long id, String name, LocalDateTime date, int statistic_point, Category category) {
+    public static Item reconstruct(Long id, String name, int statistic_point, Category category) {
         return new Item(id, name, statistic_point, category);
     }
 
-    public static void validate(String name, LocalDateTime date, int statistic_point, Category category) {
-        if(name==null || date == null || statistic_point < 0 || category == null){
+    public static void validate(String name,  int statistic_point, Category category) {
+        if(name==null ||  statistic_point < 0 || category == null){
             throw new NullException("Valores nulos o negativos no validos");
         }
         if(name.trim().isEmpty() || name.length() < 3 || name.length() > 50){

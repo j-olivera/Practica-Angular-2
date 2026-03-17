@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ItemMapper {
     public Item toEntity(ItemRequest request) {
-        return Item.create(request.name(), request.date(), request.statisticPoint(), request.category());
+        return Item.create(request.name(), request.statisticPoint(), request.category());
     }
 
     public ItemResponse toResponse(Item item) {
