@@ -3,11 +3,12 @@ package com.gestor.game.infrastructure.adapters.persistence.item;
 import com.gestor.game.application.port.out.item.ItemRepositoryPort;
 import com.gestor.game.core.entities.item.Item;
 import com.gestor.game.core.enums.item.Category;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
+@Component
 public class ItemAdapterJpa implements ItemRepositoryPort{
     private final ItemRepositoryJpa itemRepositoryJpa;
     private final ItemMapperJpa itemMapperJpa;

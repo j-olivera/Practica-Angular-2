@@ -17,13 +17,12 @@ public class CreateBuildUseCaseImpl implements CreateBuildUseCase {
     private final BuildRepositoryPort buildRepositoryPort;
     private final ItemRepositoryPort itemRepositoryPort;
     private final BuildMapper buildMapper;
-    private final ItemMapper itemMapper;
 
-    public CreateBuildUseCaseImpl(BuildRepositoryPort buildRepositoryPort, ItemRepositoryPort itemRepositoryPort, BuildMapper buildMapper, ItemMapper itemMapper) {
+    public CreateBuildUseCaseImpl(BuildRepositoryPort buildRepositoryPort, ItemRepositoryPort itemRepositoryPort, BuildMapper buildMapper) {
         this.buildRepositoryPort = buildRepositoryPort;
         this.itemRepositoryPort = itemRepositoryPort;
         this.buildMapper = buildMapper;
-        this.itemMapper = itemMapper;
+
     }
 
     @Override

@@ -20,16 +20,13 @@ public class CreateCharacterUseCaseImpl implements CreateCharacterUseCase {
     private final CharacterRepositoryPort characterRepositoryPort;
     private final UserRepositoryPort userRepositoryPort;
     private final BuildRepositoryPort buildRepositoryPort;
-    private final BuildMapper buildMapper;
-    private final UserMapper userMapper;
     private final CharacterMapper characterMapper;
 
-    public CreateCharacterUseCaseImpl(CharacterRepositoryPort characterRepositoryPort, UserRepositoryPort userRepositoryPort, BuildRepositoryPort buildRepositoryPort, BuildMapper buildMapper, UserMapper userMapper, CharacterMapper characterMapper) {
+    public CreateCharacterUseCaseImpl(CharacterRepositoryPort characterRepositoryPort, UserRepositoryPort userRepositoryPort, BuildRepositoryPort buildRepositoryPort,CharacterMapper characterMapper) {
         this.characterRepositoryPort = characterRepositoryPort;
         this.userRepositoryPort = userRepositoryPort;
         this.buildRepositoryPort = buildRepositoryPort;
-        this.buildMapper = buildMapper;
-        this.userMapper = userMapper;
+
         this.characterMapper = characterMapper;
     }
 
