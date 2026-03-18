@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/items")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ItemController {
     private final CreateItemUseCase createItemUseCase;
     private final DeleteItemUseCase deleteItemUseCase;
@@ -37,6 +38,6 @@ public class ItemController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<ItemResponse> deleteItem(@PathVariable Long id) {
         deleteItemUseCase.deleteItem(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

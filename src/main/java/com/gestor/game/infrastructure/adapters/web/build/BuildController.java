@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/builds")
+@CrossOrigin(origins = "http://localhost:4200")
 public class BuildController {
     private final CreateBuildUseCase createBuildUseCase;
     private final RetrieveBuildUseCase retrieveBuildUseCase;
