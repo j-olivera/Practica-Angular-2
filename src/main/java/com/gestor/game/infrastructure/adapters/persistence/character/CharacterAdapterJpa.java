@@ -31,7 +31,7 @@ public class CharacterAdapterJpa implements CharacterRepositoryPort {
 
     @Override
     public List<Character> findByUserId(Long userId) {
-        return characterRepository.findByUserEntityId(userId);
+        return characterRepository.findByUserEntity_Id(userId).stream().map(characterMapper::toCoreEntity).toList();
     }
 
     @Override

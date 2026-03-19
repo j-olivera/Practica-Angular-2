@@ -8,7 +8,6 @@ import java.util.List;
 
 @Repository
 public interface CharacterRepositoryJpa extends JpaRepository<CharacterEntity,Long> {
-    List<Character> findByUserEntityId(Long userEntityId);
-
+    List<CharacterEntity> findByUserEntity_Id(Long userEntityId);
     boolean existsByName(String name);
 }
