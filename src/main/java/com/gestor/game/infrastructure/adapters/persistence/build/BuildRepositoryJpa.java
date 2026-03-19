@@ -8,5 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface BuildRepositoryJpa extends JpaRepository<BuildEntity, Long> {
-    Optional<Build> findByName(String name);
+    Optional<BuildEntity> findByName(String name);
 }
+//PONER SIEMPRE SU ENTIDAD DE JPA Y NO DEL CORO DIO MIO QUE PROBLEMAS

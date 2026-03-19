@@ -30,12 +30,12 @@ public class BuildController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<BuildResponse> getBuild(@PathVariable Long id){
+    public ResponseEntity<BuildResponse> getBuildById(@PathVariable Long id){
         BuildResponse response = retrieveBuildUseCase.getBuildById(id);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping("/{name}")
+    @GetMapping("/name/{name}")
     public ResponseEntity<BuildResponse> getBuildByName(@PathVariable String name){
         BuildResponse response = retrieveBuildUseCase.getBuildByName(name);
         return new ResponseEntity<>(response, HttpStatus.OK);

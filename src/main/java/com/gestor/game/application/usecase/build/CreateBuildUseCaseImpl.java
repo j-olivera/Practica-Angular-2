@@ -37,8 +37,11 @@ public class CreateBuildUseCaseImpl implements CreateBuildUseCase {
         Item item4 = itemRepositoryPort.findById(buildRequest.blessingId())
                 .orElseThrow(()-> new ItemNotFoundException("Item not found"));
         //no se permiten nombres repetidos en la builds
-        Build build = buildRepositoryPort.findByName(buildRequest.name())
-                .orElseThrow(()-> new NameNotValidException("Name is already in use"));
+
+        buildRepositoryPort.findByName(buildRequest.name())
+                .ifPresent(existingBuild -> {
+                    throw new NameNotValidException("Name already exists");
+                });
 
         Build newBuild = buildMapper.toEntity(buildRequest, item1,item2,item3,item4);
         Build saved = buildRepositoryPort.save(newBuild);

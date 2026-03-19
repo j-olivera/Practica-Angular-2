@@ -10,7 +10,9 @@ public class Game {
     private Long userId;
     private LocalDate date;
     private Result gameResult;
-
+    /*
+    estaría bueno agregar que tambien incluya la build usada, pero en otro momento q ya toca gym
+     */
     private Game(Long id,Long userId, LocalDate date, Result gameResult) {
         this.id = id;
         this.userId = userId;

@@ -3,11 +3,13 @@ package com.gestor.game.infrastructure.adapters.persistence.build;
 import com.gestor.game.application.port.out.build.BuildRepositoryPort;
 import com.gestor.game.core.entities.build.Build;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Component
+@Transactional
 public class BuildAdapterJpa implements BuildRepositoryPort {
     private final BuildRepositoryJpa buildRepositoryJpa;
     private final BuildMapperJpa buildMapperJpa;
@@ -31,7 +33,7 @@ public class BuildAdapterJpa implements BuildRepositoryPort {
 
     @Override
     public Optional<Build> findByName(String name) {
-        return buildRepositoryJpa.findByName(name);
+        return buildRepositoryJpa.findByName(name).map(buildMapperJpa::toCoreEntity);
     }
 
     @Override

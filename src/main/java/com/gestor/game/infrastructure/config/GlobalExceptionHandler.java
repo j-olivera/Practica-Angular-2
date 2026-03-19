@@ -68,6 +68,7 @@ public class GlobalExceptionHandler {
     // 500 INTERNAL SERVER ERROR - Para atrapar cualquier error inesperado (Bugs, caída de BD, etc)
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGlobalException(Exception ex) {
+        ex.printStackTrace();
         ErrorResponse error = new ErrorResponse(
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 "Internal Server Error",

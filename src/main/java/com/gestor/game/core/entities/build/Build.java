@@ -21,13 +21,13 @@ public class Build {
         this.blessing = blessing;
     }
 
-    public static Build create(String name, Item sword, Item armor, Item amount, Item blessing) {
-        validate(sword, armor, amount, blessing, name);
-        return new Build(null, name, sword, armor, amount, blessing);
+    public static Build create(String name, Item sword, Item armor, Item mount, Item blessing) {
+        validate(sword, armor, mount, blessing, name);
+        return new Build(null, name, sword, armor, mount, blessing);
     }
 
-    public static Build reconstruct(Long id, String name, Item sword, Item armor, Item amount, Item blessing) {
-        return new Build(id, name, sword, armor, amount, blessing);
+    public static Build reconstruct(Long id, String name, Item sword, Item armor, Item mount, Item blessing) {
+        return new Build(id, name, sword, armor, mount, blessing);
     }
 
     public static void validate(Item sword, Item armor, Item amount, Item blessing, String name) {
