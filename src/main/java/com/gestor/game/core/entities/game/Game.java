@@ -3,7 +3,6 @@ package com.gestor.game.core.entities.game;
 import com.gestor.game.core.enums.game.Result;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class Game {
     private Long id;

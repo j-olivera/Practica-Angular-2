@@ -1,0 +1,7 @@
+[c:\Users\Juan Olivera\Desktop\Angula-2-CDI\src\main\java\com\gestor\game\application\dto\game\GameRequest.java] Unused import: java.time.LocalDate
+[c:\Users\Juan Olivera\Desktop\Angula-2-CDI\src\main\java\com\gestor\game\application\dto\game\GameRequest.java] Unused import: java.time.LocalDateTime
+[c:\Users\Juan Olivera\Desktop\Angula-2-CDI\src\main\java\com\gestor\game\application\dto\game\GameResponse.java] Unused import: java.time.LocalDateTime
+[c:\Users\Juan Olivera\Desktop\Angula-2-CDI\src\main\java\com\gestor\game\application\port\in\build\RetrieveBuildUseCase.java] Unused import: com.gestor.game.core.entities.build.Build
+[c:\Users\Juan Olivera\Desktop\Angula-2-CDI\src\main\java\com\gestor\game\application\port\in\user\RetrieveUserUseCase.java] Unused import: com.gestor.game.application.dto.user.UserRequest
+[c:\Users\Juan Olivera\Desktop\Angula-2-CDI\src\main\java\com\gestor\game\application\usecase\build\CreateBuildUseCaseImpl.java] Unused import: com.gestor.game.application.port.out.game.GameRepositoryPort
+[c:\Users\Juan Olivera\Desktop\Angula-2-CDI\src\main\java\com\gestor\game\application\usecase\item\RetrieveItemUseCaseImpl.java] Unused import: java.util.Optional

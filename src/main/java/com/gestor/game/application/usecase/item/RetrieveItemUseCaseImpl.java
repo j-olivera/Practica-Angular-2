@@ -9,7 +9,6 @@ import com.gestor.game.core.enums.item.Category;
 import com.gestor.game.core.exceptions.item.ItemNotFoundException;
 
 import java.util.List;
-import java.util.Optional;
 
 public class RetrieveItemUseCaseImpl implements RetrieveItemUseCase {
     private final ItemRepositoryPort itemRepositoryPort;

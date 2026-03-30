@@ -6,7 +6,6 @@ import com.gestor.game.application.mappers.build.BuildMapper;
 import com.gestor.game.application.mappers.item.ItemMapper;
 import com.gestor.game.application.port.in.build.CreateBuildUseCase;
 import com.gestor.game.application.port.out.build.BuildRepositoryPort;
-import com.gestor.game.application.port.out.game.GameRepositoryPort;
 import com.gestor.game.application.port.out.item.ItemRepositoryPort;
 import com.gestor.game.core.entities.build.Build;
 import com.gestor.game.core.entities.item.Item;
