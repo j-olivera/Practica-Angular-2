@@ -39,8 +39,8 @@ public class CharacterController {
         return new ResponseEntity<>(characterResponse, HttpStatus.OK);
     }
     @PutMapping("/{characterId}/build/{buildId}")
-    public ResponseEntity<CharacterResponse> updateCharacter(@PathVariable Long characterId, @PathVariable Long builId ){
-        CharacterResponse characterResponse = updateCharacterBuildUseCase.updateCharacterBuild(characterId, builId);
+    public ResponseEntity<CharacterResponse> updateCharacter(@PathVariable("characterId") Long characterId, @PathVariable("buildId") Long buildId){
+        CharacterResponse characterResponse = updateCharacterBuildUseCase.updateCharacterBuild(characterId, buildId);
         return new ResponseEntity<>(characterResponse, HttpStatus.OK);
     }
     @DeleteMapping("/delete/{id}")

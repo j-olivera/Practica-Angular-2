@@ -31,3 +31,10 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### node.js ###
+node_modules/
+.angular/
+.npm/
+.cache/
+.angular/cache

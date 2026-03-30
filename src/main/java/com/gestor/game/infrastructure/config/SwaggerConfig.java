@@ -17,3 +17,5 @@ public class SwaggerConfig {
                                 "Aquí puedes probar la creación de usuarios, ítems, builds y personajes."));
     }
 }
+// http://localhost:8080/swagger-ui/index.html#/
+// esa me funciono
