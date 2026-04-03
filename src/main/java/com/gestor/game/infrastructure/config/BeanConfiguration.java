@@ -9,6 +9,7 @@ import com.gestor.game.application.port.out.build.BuildRepositoryPort;
 import com.gestor.game.application.port.out.character.CharacterRepositoryPort;
 import com.gestor.game.application.port.out.game.GameRepositoryPort;
 import com.gestor.game.application.port.out.item.ItemRepositoryPort;
+import com.gestor.game.application.port.out.security.PasswordEncoderPort;
 import com.gestor.game.application.port.out.user.UserRepositoryPort;
 import com.gestor.game.application.usecase.build.CreateBuildUseCaseImpl;
 import com.gestor.game.application.usecase.build.RetrieveBuildUseCaseImpl;
@@ -22,8 +23,10 @@ import com.gestor.game.application.usecase.item.CreateItemUseCaseImpl;
 import com.gestor.game.application.usecase.item.DeleteItemUseCaseImpl;
 import com.gestor.game.application.usecase.item.RetrieveItemUseCaseImpl;
 import com.gestor.game.application.usecase.user.CreateUserUseCaseImpl;
+import com.gestor.game.application.usecase.user.RegisterUserUseCaseImpl;
 import com.gestor.game.application.usecase.user.RetrieveUserUseCaseImpl;
 import com.gestor.game.infrastructure.adapters.persistence.build.BuildMapperJpa;
+import com.gestor.game.infrastructure.adapters.security.BCryptPasswordEncoderAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -53,8 +56,21 @@ public class BeanConfiguration {
     }
     // --- USER ---
     @Bean
+    public PasswordEncoderPort passwordEncoderPort() {
+        return new BCryptPasswordEncoderAdapter();
+    }
+
+    @Bean
     public CreateUserUseCaseImpl createUserUseCase(UserRepositoryPort userRepositoryPort, UserMapper userMapper) {
         return new CreateUserUseCaseImpl(userRepositoryPort,userMapper);
+    }
+
+    @Bean
+    public RegisterUserUseCaseImpl registerUserUseCase(
+            UserRepositoryPort userRepositoryPort,
+            UserMapper userMapper,
+            PasswordEncoderPort passwordEncoderPort) {
+        return new RegisterUserUseCaseImpl(userRepositoryPort, userMapper, passwordEncoderPort);
     }
 
     @Bean

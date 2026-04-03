@@ -1,0 +1,22 @@
+schema: spec-driven
+
+context: |
+  Tech stack: Java 21, Spring Boot 3.4, MySQL, JPA, Maven.
+  Architecture: Hexagonal (core / application / infrastructure).
+  Testing: Spring Boot Test (smoke); strict TDD disabled.
+  Style: Records for DTOs, explicit @Bean wiring in BeanConfiguration.
+
+rules:
+  proposal:
+    - Include rollback plan for risky changes
+  specs:
+    - Use Given/When/Then for scenarios
+    - Use RFC 2119 keywords (MUST, SHALL, SHOULD, MAY)
+  design:
+    - Document architecture decisions with rationale
+  tasks:
+    - Group by phase, use hierarchical numbering
+  apply:
+    - Follow existing code patterns
+  verify:
+    build_command: "mvn -q -f pom.xml test"
