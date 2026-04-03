@@ -6,6 +6,7 @@ import com.gestor.game.core.exceptions.build.BuildDontExistException;
 import com.gestor.game.core.exceptions.character.CharacterDoesNotExistException;
 import com.gestor.game.core.exceptions.game.GameDoesNotExistException;
 import com.gestor.game.core.exceptions.item.ItemNotFoundException;
+import com.gestor.game.core.exceptions.auth.ForbiddenAccessException;
 import com.gestor.game.core.exceptions.auth.InvalidCredentialsException;
 import com.gestor.game.core.exceptions.user.UserAlreadyExistException;
 import com.gestor.game.core.exceptions.user.UserDontExistException;
@@ -47,6 +48,17 @@ public class GlobalExceptionHandler {
                 LocalDateTime.now()
         );
         return new ResponseEntity<>(error, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(ForbiddenAccessException.class)
+    public ResponseEntity<ErrorResponse> handleForbidden(RuntimeException ex) {
+        ErrorResponse error = new ErrorResponse(
+                HttpStatus.FORBIDDEN.value(),
+                "Forbidden",
+                ex.getMessage(),
+                LocalDateTime.now()
+        );
+        return new ResponseEntity<>(error, HttpStatus.FORBIDDEN);
     }
 
     @ExceptionHandler(InvalidCredentialsException.class)

@@ -4,9 +4,9 @@ import com.gestor.game.application.dto.game.GameRequest;
 import com.gestor.game.application.dto.game.GameResponse;
 import com.gestor.game.application.port.in.game.RegisterGameUseCase;
 import com.gestor.game.application.port.in.game.RetrieveGameHistoryUseCase;
-import com.gestor.game.application.port.out.game.GameRepositoryPort;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,20 +27,27 @@ public class GameController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<GameResponse> createGame(@RequestBody GameRequest gameRequest){
-        GameResponse response = registerGameUseCase.registerGame(gameRequest);
+    public ResponseEntity<GameResponse> createGame(
+            @RequestBody GameRequest gameRequest,
+            @AuthenticationPrincipal Long authenticatedUserId) {
+        GameResponse response = registerGameUseCase.registerGame(gameRequest, authenticatedUserId);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<GameResponse> getGameById(@PathVariable Long id){
-        GameResponse response = retrieveGameHistoryUseCase.getGameById(id);
+    public ResponseEntity<GameResponse> getGameById(
+            @PathVariable Long id,
+            @AuthenticationPrincipal Long authenticatedUserId) {
+        GameResponse response = retrieveGameHistoryUseCase.getGameById(id, authenticatedUserId);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<List<GameResponse>> getGameUserById(@PathVariable Long id){
-        List<GameResponse> response = retrieveGameHistoryUseCase.getGameByUserId(id);
+    public ResponseEntity<List<GameResponse>> getGameUserById(
+            @PathVariable Long id,
+            @AuthenticationPrincipal Long authenticatedUserId) {
+        List<GameResponse> response =
+                retrieveGameHistoryUseCase.getGameByUserId(id, authenticatedUserId);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

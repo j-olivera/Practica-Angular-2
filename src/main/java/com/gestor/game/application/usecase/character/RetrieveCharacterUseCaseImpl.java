@@ -7,6 +7,7 @@ import com.gestor.game.application.port.out.character.CharacterRepositoryPort;
 import com.gestor.game.application.port.out.user.UserRepositoryPort;
 import com.gestor.game.core.entities.character.Character;
 import com.gestor.game.core.entities.user.User;
+import com.gestor.game.core.exceptions.auth.ForbiddenAccessException;
 import com.gestor.game.core.exceptions.character.CharacterDoesNotExistException;
 import com.gestor.game.core.exceptions.user.UserDontExistException;
 
@@ -25,16 +26,20 @@ public class RetrieveCharacterUseCaseImpl implements RetrieveCharacterUseCase {
 
 
     @Override
-    public CharacterResponse getCharacterById(Long id) {
+    public CharacterResponse getCharacterById(Long id, Long requesterUserId) {
         Character character = characterRepositoryPort.findById(id)
                 .orElseThrow(()-> new CharacterDoesNotExistException("Character doesn't exist"));
-
+        if (!character.getUser().getId().equals(requesterUserId)) {
+            throw new ForbiddenAccessException("You can only access your own characters");
+        }
         return characterMapper.toResponse(character);
     }
 
     @Override
-    public List<CharacterResponse> getCharactersByUserId(Long userId) {
-        //verificación de usurio existente
+    public List<CharacterResponse> getCharactersByUserId(Long userId, Long requesterUserId) {
+        if (!userId.equals(requesterUserId)) {
+            throw new ForbiddenAccessException("You can only list your own characters");
+        }
         User user  = userRepositoryPort.findById(userId)
                 .orElseThrow(()-> new UserDontExistException("User with id "+ userId +" doesn't exist"));
 

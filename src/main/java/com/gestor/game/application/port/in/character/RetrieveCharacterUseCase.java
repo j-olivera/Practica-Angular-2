@@ -5,6 +5,7 @@ import com.gestor.game.application.dto.character.CharacterResponse;
 import java.util.List;
 
 public interface RetrieveCharacterUseCase {
-    CharacterResponse getCharacterById(Long id);
-    List<CharacterResponse> getCharactersByUserId(Long userId);
+    CharacterResponse getCharacterById(Long id, Long requesterUserId);
+
+    List<CharacterResponse> getCharactersByUserId(Long userId, Long requesterUserId);
 }

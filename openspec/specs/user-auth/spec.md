@@ -73,3 +73,25 @@ The system MUST require a valid `Authorization: Bearer <JWT>` header for HTTP re
 - GIVEN the client does not send a JWT
 - WHEN the client calls user registration or login endpoints
 - THEN the system MUST NOT require prior authentication
+
+### Requirement: Resource access bound to authenticated user
+
+For user-scoped data, the system MUST allow operations only when the authenticated user identity from the JWT matches the owner of the resource or the user id given in the request path or body (as applicable).
+
+#### Scenario: User profile access
+
+- GIVEN a valid JWT for user A
+- WHEN the client requests `GET /api/users/{id}` with `id` not equal to A
+- THEN the system MUST respond with 403 Forbidden
+
+#### Scenario: Character and game ownership
+
+- GIVEN a valid JWT for user A
+- WHEN the client attempts to create, read, update, or delete a character, or register or read games, on behalf of another user id or for resources owned by another user
+- THEN the system MUST respond with 403 Forbidden
+
+#### Scenario: Shared catalog without per-user ownership
+
+- GIVEN items and builds are not modeled with an owning user in the domain
+- WHEN the client accesses item or build endpoints with a valid JWT
+- THEN the system MAY allow access without an ownership check (until a future model adds ownership)

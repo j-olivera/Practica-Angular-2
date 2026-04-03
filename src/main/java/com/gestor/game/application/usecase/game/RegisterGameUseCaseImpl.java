@@ -6,6 +6,7 @@ import com.gestor.game.application.mappers.game.GameMapper;
 import com.gestor.game.application.port.in.game.RegisterGameUseCase;
 import com.gestor.game.application.port.out.game.GameRepositoryPort;
 import com.gestor.game.core.entities.game.Game;
+import com.gestor.game.core.exceptions.auth.ForbiddenAccessException;
 
 public class RegisterGameUseCaseImpl implements RegisterGameUseCase {
     private final GameRepositoryPort gameRepositoryPort;
@@ -17,8 +18,10 @@ public class RegisterGameUseCaseImpl implements RegisterGameUseCase {
     }
 
     @Override
-    public GameResponse registerGame(GameRequest gameRequest) {
-        //mismo caso que item, solo que no puede haber juegos repetidos por logica
+    public GameResponse registerGame(GameRequest gameRequest, Long requesterUserId) {
+        if (!gameRequest.userId().equals(requesterUserId)) {
+            throw new ForbiddenAccessException("You can only register games for your own account");
+        }
         Game  game = gameMapper.toEntity(gameRequest);
         Game saved = gameRepositoryPort.save(game);
         return gameMapper.toResponse(saved);

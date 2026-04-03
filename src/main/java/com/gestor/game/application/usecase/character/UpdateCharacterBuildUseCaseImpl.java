@@ -7,6 +7,7 @@ import com.gestor.game.application.port.out.build.BuildRepositoryPort;
 import com.gestor.game.application.port.out.character.CharacterRepositoryPort;
 import com.gestor.game.core.entities.build.Build;
 import com.gestor.game.core.entities.character.Character;
+import com.gestor.game.core.exceptions.auth.ForbiddenAccessException;
 import com.gestor.game.core.exceptions.build.BuildDontExistException;
 import com.gestor.game.core.exceptions.character.CharacterDoesNotExistException;
 
@@ -22,12 +23,12 @@ public class UpdateCharacterBuildUseCaseImpl implements UpdateCharacterBuildUseC
     }
 
     @Override
-    public CharacterResponse updateCharacterBuild(Long characterId, Long buildId) {
-        //revisar si la build existe
+    public CharacterResponse updateCharacterBuild(Long characterId, Long buildId, Long requesterUserId) {
         Build build = buildRepositoryPort.findById(buildId).orElseThrow(()-> new BuildDontExistException("Build does not exist"));
-        //revisar si el character a actualizar existe
         Character character = characterRepositoryPort.findById(characterId).orElseThrow(()-> new CharacterDoesNotExistException("Character does not exist"));
-        //
+        if (!character.getUser().getId().equals(requesterUserId)) {
+            throw new ForbiddenAccessException("You can only update your own characters");
+        }
         Character characterToUpdate = Character.reconstruct(character.getId(),character.getUser(),character.getName(),build,character.getWarriorClass());
         //
         Character saved = characterRepositoryPort.save(characterToUpdate);

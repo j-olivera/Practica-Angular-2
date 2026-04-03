@@ -2,15 +2,14 @@ package com.gestor.game.application.usecase.character;
 
 import com.gestor.game.application.dto.character.CharacterRequest;
 import com.gestor.game.application.dto.character.CharacterResponse;
-import com.gestor.game.application.mappers.build.BuildMapper;
 import com.gestor.game.application.mappers.character.CharacterMapper;
-import com.gestor.game.application.mappers.user.UserMapper;
 import com.gestor.game.application.port.in.character.CreateCharacterUseCase;
 import com.gestor.game.application.port.out.build.BuildRepositoryPort;
 import com.gestor.game.application.port.out.character.CharacterRepositoryPort;
 import com.gestor.game.application.port.out.user.UserRepositoryPort;
 import com.gestor.game.core.entities.build.Build;
 import com.gestor.game.core.entities.user.User;
+import com.gestor.game.core.exceptions.auth.ForbiddenAccessException;
 import com.gestor.game.core.exceptions.NameNotValidException;
 import com.gestor.game.core.exceptions.build.BuildDontExistException;
 import com.gestor.game.core.exceptions.user.UserDontExistException;
@@ -32,7 +31,10 @@ public class CreateCharacterUseCaseImpl implements CreateCharacterUseCase {
 
 
     @Override
-    public CharacterResponse createCharacter(CharacterRequest characterRequest) {
+    public CharacterResponse createCharacter(CharacterRequest characterRequest, Long requesterUserId) {
+        if (!characterRequest.userId().equals(requesterUserId)) {
+            throw new ForbiddenAccessException("You can only create characters for your own account");
+        }
 
         User user = userRepositoryPort.findById(characterRequest.userId())
                 .orElseThrow(()-> new UserDontExistException("User don't exist"));

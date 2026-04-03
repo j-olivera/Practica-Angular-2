@@ -6,6 +6,7 @@ import com.gestor.game.application.port.in.user.CreateUserUseCase;
 import com.gestor.game.application.port.in.user.RetrieveUserUseCase;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,8 +29,10 @@ public class UserController {
         return new ResponseEntity<>(userResponse, HttpStatus.CREATED);
     }
     @GetMapping("/{id}")
-    public ResponseEntity<UserResponse> retrieveUser(@PathVariable Long id) {
-        UserResponse userResponse = retrieveUserUseCase.getUserById(id);
+    public ResponseEntity<UserResponse> retrieveUser(
+            @PathVariable Long id,
+            @AuthenticationPrincipal Long authenticatedUserId) {
+        UserResponse userResponse = retrieveUserUseCase.getUserById(id, authenticatedUserId);
         return new ResponseEntity<>(userResponse, HttpStatus.OK);
     }
 }
