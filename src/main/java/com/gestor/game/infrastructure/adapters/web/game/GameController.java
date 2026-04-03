@@ -5,6 +5,7 @@ import com.gestor.game.application.dto.game.GameResponse;
 import com.gestor.game.application.port.in.game.RegisterGameUseCase;
 import com.gestor.game.application.port.in.game.RetrieveGameHistoryUseCase;
 import com.gestor.game.application.port.out.game.GameRepositoryPort;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/games")
 @CrossOrigin(origins = "http://localhost:4200")
+@SecurityRequirement(name = "bearerAuth")
 public class GameController {
 
     private final RegisterGameUseCase registerGameUseCase;

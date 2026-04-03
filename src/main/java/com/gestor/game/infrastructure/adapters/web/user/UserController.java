@@ -4,6 +4,7 @@ import com.gestor.game.application.dto.user.UserRequest;
 import com.gestor.game.application.dto.user.UserResponse;
 import com.gestor.game.application.port.in.user.CreateUserUseCase;
 import com.gestor.game.application.port.in.user.RetrieveUserUseCase;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/users")
 @CrossOrigin(origins = "http://localhost:4200")
+@SecurityRequirement(name = "bearerAuth")
 public class UserController {
     private final CreateUserUseCase createUserUseCase;
     private final RetrieveUserUseCase retrieveUserUseCase;

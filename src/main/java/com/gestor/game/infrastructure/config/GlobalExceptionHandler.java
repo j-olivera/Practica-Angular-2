@@ -6,6 +6,7 @@ import com.gestor.game.core.exceptions.build.BuildDontExistException;
 import com.gestor.game.core.exceptions.character.CharacterDoesNotExistException;
 import com.gestor.game.core.exceptions.game.GameDoesNotExistException;
 import com.gestor.game.core.exceptions.item.ItemNotFoundException;
+import com.gestor.game.core.exceptions.auth.InvalidCredentialsException;
 import com.gestor.game.core.exceptions.user.UserAlreadyExistException;
 import com.gestor.game.core.exceptions.user.UserDontExistException;
 import org.springframework.http.HttpStatus;
@@ -46,6 +47,17 @@ public class GlobalExceptionHandler {
                 LocalDateTime.now()
         );
         return new ResponseEntity<>(error, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(InvalidCredentialsException.class)
+    public ResponseEntity<ErrorResponse> handleUnauthorized(RuntimeException ex) {
+        ErrorResponse error = new ErrorResponse(
+                HttpStatus.UNAUTHORIZED.value(),
+                "Unauthorized",
+                ex.getMessage(),
+                LocalDateTime.now()
+        );
+        return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
     }
 
     // 400 BAD REQUEST - Cuando los datos enviados son inválidos o nulos

@@ -22,15 +22,20 @@ import com.gestor.game.application.usecase.game.RetrieveGameHistoryUseCaseImpl;
 import com.gestor.game.application.usecase.item.CreateItemUseCaseImpl;
 import com.gestor.game.application.usecase.item.DeleteItemUseCaseImpl;
 import com.gestor.game.application.usecase.item.RetrieveItemUseCaseImpl;
+import com.gestor.game.application.usecase.auth.LoginUseCaseImpl;
 import com.gestor.game.application.usecase.user.CreateUserUseCaseImpl;
 import com.gestor.game.application.usecase.user.RegisterUserUseCaseImpl;
 import com.gestor.game.application.usecase.user.RetrieveUserUseCaseImpl;
+import com.gestor.game.application.port.out.security.JwtTokenPort;
 import com.gestor.game.infrastructure.adapters.persistence.build.BuildMapperJpa;
 import com.gestor.game.infrastructure.adapters.security.BCryptPasswordEncoderAdapter;
+import com.gestor.game.infrastructure.adapters.security.JwtTokenAdapter;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@EnableConfigurationProperties(JwtProperties.class)
 public class BeanConfiguration {
 
     //LOS PTOS MAPPERS
@@ -58,6 +63,20 @@ public class BeanConfiguration {
     @Bean
     public PasswordEncoderPort passwordEncoderPort() {
         return new BCryptPasswordEncoderAdapter();
+    }
+
+    @Bean
+    public JwtTokenPort jwtTokenPort(JwtProperties jwtProperties) {
+        return new JwtTokenAdapter(jwtProperties);
+    }
+
+    @Bean
+    public LoginUseCaseImpl loginUseCase(
+            UserRepositoryPort userRepositoryPort,
+            PasswordEncoderPort passwordEncoderPort,
+            JwtTokenPort jwtTokenPort,
+            UserMapper userMapper) {
+        return new LoginUseCaseImpl(userRepositoryPort, passwordEncoderPort, jwtTokenPort, userMapper);
     }
 
     @Bean

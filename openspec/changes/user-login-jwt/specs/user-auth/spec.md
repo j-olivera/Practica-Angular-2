@@ -1,37 +1,6 @@
-# User authentication
+# Delta for user-auth
 
-## Purpose
-
-Registro público, login con JWT y acceso protegido a la API REST bajo `/api/**` (salvo rutas públicas de autenticación y documentación OpenAPI).
-
-## Requirements
-
-### Requirement: Public registration endpoint
-
-The system MUST expose an HTTP endpoint that allows a new user to register with name, email, and password.
-
-#### Scenario: Successful registration
-
-- GIVEN no user exists with the submitted email
-- WHEN the client sends valid name, email, and password to the registration endpoint
-- THEN the system MUST respond with 201 Created
-- AND the body MUST include the new user id, name, and email
-- AND the body MUST NOT include the password
-- AND the stored password MUST be a one-way hash (not plaintext)
-
-#### Scenario: Duplicate email
-
-- GIVEN a user already exists with the same email
-- WHEN the client submits registration with that email
-- THEN the system MUST respond with 409 Conflict
-- AND no duplicate user record MUST be created
-
-#### Scenario: Invalid domain data
-
-- GIVEN name, email, or password violates existing domain validation rules
-- WHEN the client submits registration
-- THEN the system MUST respond with 400 Bad Request
-- AND MUST NOT persist the user
+## ADDED Requirements
 
 ### Requirement: Login with JWT issuance
 
@@ -73,3 +42,34 @@ The system MUST require a valid `Authorization: Bearer <JWT>` header for HTTP re
 - GIVEN the client does not send a JWT
 - WHEN the client calls user registration or login endpoints
 - THEN the system MUST NOT require prior authentication
+
+## MODIFIED Requirements
+
+### Requirement: Public registration endpoint
+
+The system MUST expose an HTTP endpoint that allows a new user to register with name, email, and password.
+
+#### Scenario: Successful registration
+
+- GIVEN no user exists with the submitted email
+- WHEN the client sends valid name, email, and password to the registration endpoint
+- THEN the system MUST respond with 201 Created
+- AND the body MUST include the new user id, name, and email
+- AND the body MUST NOT include the password
+- AND the stored password MUST be a one-way hash (not plaintext)
+
+#### Scenario: Duplicate email
+
+- GIVEN a user already exists with the same email
+- WHEN the client submits registration with that email
+- THEN the system MUST respond with 409 Conflict
+- AND no duplicate user record MUST be created
+
+#### Scenario: Invalid domain data
+
+- GIVEN name, email, or password violates existing domain validation rules
+- WHEN the client submits registration
+- THEN the system MUST respond with 400 Bad Request
+- AND MUST NOT persist the user
+
+(Previously: mismo requisito sin contexto de rutas protegidas; el registro sigue siendo público.)

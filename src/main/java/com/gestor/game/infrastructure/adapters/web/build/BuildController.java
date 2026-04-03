@@ -5,6 +5,7 @@ import com.gestor.game.application.dto.build.BuildResponse;
 import com.gestor.game.application.port.in.build.CreateBuildUseCase;
 import com.gestor.game.application.port.in.build.RetrieveBuildUseCase;
 import com.gestor.game.core.entities.build.Build;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/builds")
 @CrossOrigin(origins = "http://localhost:4200")
+@SecurityRequirement(name = "bearerAuth")
 public class BuildController {
     private final CreateBuildUseCase createBuildUseCase;
     private final RetrieveBuildUseCase retrieveBuildUseCase;

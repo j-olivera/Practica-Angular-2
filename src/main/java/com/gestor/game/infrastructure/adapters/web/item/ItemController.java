@@ -5,6 +5,7 @@ import com.gestor.game.application.dto.item.ItemResponse;
 import com.gestor.game.application.port.in.item.CreateItemUseCase;
 import com.gestor.game.application.port.in.item.DeleteItemUseCase;
 import com.gestor.game.application.port.in.item.RetrieveItemUseCase;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/items")
 @CrossOrigin(origins = "http://localhost:4200")
+@SecurityRequirement(name = "bearerAuth")
 public class ItemController {
     private final CreateItemUseCase createItemUseCase;
     private final DeleteItemUseCase deleteItemUseCase;

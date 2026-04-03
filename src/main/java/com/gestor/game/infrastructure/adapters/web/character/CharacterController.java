@@ -6,6 +6,7 @@ import com.gestor.game.application.port.in.character.CreateCharacterUseCase;
 import com.gestor.game.application.port.in.character.DeleteCharacterUseCase;
 import com.gestor.game.application.port.in.character.RetrieveCharacterUseCase;
 import com.gestor.game.application.port.in.character.UpdateCharacterBuildUseCase;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/characters")
 @CrossOrigin(origins = "http://localhost:4200")
+@SecurityRequirement(name = "bearerAuth")
 public class CharacterController {
 
     private final CreateCharacterUseCase createCharacterUseCase;
