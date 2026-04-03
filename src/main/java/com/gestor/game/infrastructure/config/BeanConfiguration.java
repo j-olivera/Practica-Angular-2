@@ -23,7 +23,6 @@ import com.gestor.game.application.usecase.item.CreateItemUseCaseImpl;
 import com.gestor.game.application.usecase.item.DeleteItemUseCaseImpl;
 import com.gestor.game.application.usecase.item.RetrieveItemUseCaseImpl;
 import com.gestor.game.application.usecase.auth.LoginUseCaseImpl;
-import com.gestor.game.application.usecase.user.CreateUserUseCaseImpl;
 import com.gestor.game.application.usecase.user.RegisterUserUseCaseImpl;
 import com.gestor.game.application.usecase.user.RetrieveUserUseCaseImpl;
 import com.gestor.game.application.port.out.security.JwtTokenPort;
@@ -77,11 +76,6 @@ public class BeanConfiguration {
             JwtTokenPort jwtTokenPort,
             UserMapper userMapper) {
         return new LoginUseCaseImpl(userRepositoryPort, passwordEncoderPort, jwtTokenPort, userMapper);
-    }
-
-    @Bean
-    public CreateUserUseCaseImpl createUserUseCase(UserRepositoryPort userRepositoryPort, UserMapper userMapper) {
-        return new CreateUserUseCaseImpl(userRepositoryPort,userMapper);
     }
 
     @Bean
